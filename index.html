@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fuego Creativo | Bilingual Workspace</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="header">
+      <h1 data-i18n="title">Fuego Creativo</h1>
+      <p data-i18n="subtitle">Un espacio limpio para construir nuevas ideas.</p>
+      <button id="lang-toggle" class="lang-toggle" aria-label="Cambiar idioma">
+        EN
+      </button>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2 data-i18n="visionTitle">Visión</h2>
+        <p data-i18n="visionBody">
+          Este entorno es una base enfocada y simple para experimentar, validar y publicar.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2 data-i18n="workflowTitle">Flujo recomendado</h2>
+        <ul>
+          <li data-i18n="workflow1">main: versión pública estable.</li>
+          <li data-i18n="workflow2">development: entorno de trabajo activo.</li>
+          <li data-i18n="workflow3">Feature branches para cambios puntuales.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <small data-i18n="footer">Hecho para iterar rápido, sin ruido.</small>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
