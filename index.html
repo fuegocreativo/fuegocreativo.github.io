@@ -1,3 +1,4 @@
+<!--
 <!doctype html>
 <html lang="es">
   <head>
@@ -39,4 +40,967 @@
 
     <script src="script.js"></script>
   </body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fuego Creativo — Join the Movement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --pink: #E8007D;
+    --yellow: #FFE500;
+    --black: #0A0A0A;
+    --white: #F7F5F0;
+    --gray-light: #E8E6E0;
+    --gray-mid: #999;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--white);
+    color: var(--black);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* ---- NOISE TEXTURE OVERLAY ---- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--black);
+    border-bottom: 2px solid var(--pink);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo svg { width: 32px; height: 32px; }
+
+  .nav-brand {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    letter-spacing: 2px;
+  }
+
+  .nav-brand span { color: var(--pink); }
+
+  .nav-cta {
+    background: var(--pink);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border: none;
+    padding: 0.5rem 1.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .nav-cta:hover { background: #c0006a; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    padding-top: 72px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--black);
+    padding: 5rem 3rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    color: var(--pink);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    color: var(--white);
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title .on { color: var(--pink); }
+
+  .hero-sub {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    letter-spacing: 3px;
+    background: var(--black);
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .hero-desc {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.95rem;
+    color: #aaa;
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-desc em { color: var(--pink); font-style: normal; }
+
+  .hero-date-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    padding: 0.6rem 1.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .hero-date-pill .dot {
+    width: 8px; height: 8px;
+    background: var(--black);
+    border-radius: 50%;
+    animation: blink 1.2s ease-in-out infinite;
+  }
+
+  @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+  /* ---- FORM inside hero left ---- */
+  .hero-form { display: flex; flex-direction: column; gap: 10px; max-width: 380px; }
+
+  .hero-form input {
+    background: transparent;
+    border: 1.5px solid #444;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+
+  .hero-form input::placeholder { color: #666; }
+  .hero-form input:focus { border-color: var(--pink); }
+
+  .btn-main {
+    background: var(--pink);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-align: center;
+  }
+
+  .btn-main:hover { background: #c0006a; }
+  .btn-main:active { transform: scale(0.98); }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: #555;
+    text-align: center;
+    font-family: 'Special Elite', monospace;
+  }
+
+  /* ---- HERO RIGHT ---- */
+  .hero-right {
+    position: relative;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-poster {
+    flex: 1;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    min-height: 300px;
+  }
+
+  /* Big typographic poster background */
+  .poster-bg-text {
+    position: absolute;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18vw;
+    color: rgba(232,0,125,0.06);
+    white-space: nowrap;
+    user-select: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-15deg);
+    pointer-events: none;
+  }
+
+  .poster-content {
+    position: relative;
+    z-index: 2;
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+
+  .poster-big {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 1rem;
+  }
+
+  .poster-big .highlight {
+    color: var(--pink);
+    -webkit-text-stroke: 0px;
+  }
+
+  .poster-big .outline {
+    -webkit-text-stroke: 2px var(--white);
+    color: transparent;
+  }
+
+  .join-label {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    padding: 0.3rem 1rem;
+    margin-top: 1rem;
+  }
+
+  /* decorative film strip */
+  .film-strip {
+    width: 100%;
+    height: 40px;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .film-hole {
+    width: 20px;
+    height: 20px;
+    background: #1a1a1a;
+    border: 2px solid #333;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin: 0 8px;
+  }
+
+  .film-text {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.7rem;
+    color: #444;
+    letter-spacing: 4px;
+    white-space: nowrap;
+    flex: 1;
+    text-align: center;
+  }
+
+  .hero-info-bar {
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    gap: 2rem;
+    border-top: 1.5px solid var(--gray-light);
+    flex-wrap: wrap;
+  }
+
+  .info-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .info-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gray-mid);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .info-value {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    color: var(--black);
+    letter-spacing: 1px;
+  }
+
+  /* ---- MARQUEE BAND ---- */
+  .marquee-band {
+    background: var(--pink);
+    overflow: hidden;
+    padding: 0.6rem 0;
+    white-space: nowrap;
+  }
+
+  .marquee-inner {
+    display: inline-block;
+    animation: marquee 18s linear infinite;
+  }
+
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .marquee-inner span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: var(--white);
+    margin: 0 2rem;
+  }
+
+  .marquee-inner .dot-sep {
+    color: var(--yellow);
+    margin: 0;
+  }
+
+  /* ---- WHAT IS IT ---- */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-eyebrow {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    color: var(--pink);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 0.95;
+    margin-bottom: 2rem;
+  }
+
+  /* ---- PILLARS GRID ---- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--black);
+    border: 1.5px solid var(--black);
+    margin: 4rem 0;
+  }
+
+  .pillar {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    position: relative;
+  }
+
+  .pillar-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--gray-light);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .pillar-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.7;
+    font-family: 'Special Elite', monospace;
+  }
+
+  .pillar:nth-child(1) .pillar-num { color: rgba(232,0,125,0.15); }
+
+  /* ---- WHAT YOU GET ---- */
+  .what-section {
+    background: var(--black);
+    color: var(--white);
+    padding: 5rem 2rem;
+  }
+
+  .what-inner { max-width: 1100px; margin: 0 auto; }
+
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .what-items { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .what-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    border-bottom: 1px solid #222;
+    padding-bottom: 1.2rem;
+  }
+
+  .what-item:last-child { border-bottom: none; }
+
+  .what-tag {
+    background: var(--pink);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 0.2rem 0.6rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .what-text { font-size: 0.95rem; color: #ccc; line-height: 1.6; font-family: 'Special Elite', monospace; }
+  .what-text strong { color: var(--white); font-style: normal; }
+
+  .price-box {
+    background: var(--white);
+    color: var(--black);
+    padding: 3rem 2.5rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .price-box::before {
+    content: 'JUNE 27';
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--yellow);
+    color: var(--black);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    padding: 0.25rem 1rem;
+  }
+
+  .price-amount {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 5rem;
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .price-amount sup {
+    font-size: 2rem;
+    vertical-align: top;
+    margin-top: 0.5rem;
+    display: inline-block;
+  }
+
+  .price-includes {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    color: #555;
+    margin: 1rem 0;
+    line-height: 1.8;
+  }
+
+  .price-includes strong { color: var(--black); }
+
+  .btn-price {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    border: none;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .btn-price:hover { background: var(--pink); }
+
+  .spots-left {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.75rem;
+    color: var(--pink);
+    margin-top: 0.75rem;
+  }
+
+  /* ---- ABOUT ---- */
+  .about-band {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-quote {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1;
+    color: var(--black);
+  }
+
+  .about-quote .pink { color: var(--pink); }
+
+  .about-quote .outline-text {
+    -webkit-text-stroke: 2px var(--black);
+    color: transparent;
+  }
+
+  .about-body {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: #444;
+  }
+
+  .about-body p { margin-bottom: 1.2rem; }
+
+  .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+
+  .tag {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    padding: 0.3rem 0.8rem;
+    border: 1.5px solid var(--black);
+    color: var(--black);
+    cursor: default;
+  }
+
+  /* ---- BOTTOM CTA ---- */
+  .cta-section {
+    background: var(--pink);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-section .cta-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-section .cta-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2.5rem;
+  }
+
+  .cta-form {
+    display: flex;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .cta-form input {
+    flex: 1;
+    background: var(--white);
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    padding: 1rem 1.2rem;
+    outline: none;
+    color: var(--black);
+  }
+
+  .cta-form input::placeholder { color: #999; }
+
+  .cta-btn {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    border: none;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .cta-btn:hover { background: #222; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--black);
+    color: #555;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  footer span { color: var(--pink); }
+
+  /* ---- SUCCESS STATE ---- */
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(232,0,125,0.1);
+    border: 1.5px solid var(--pink);
+    margin-top: 0.5rem;
+  }
+
+  .success-msg p {
+    font-family: 'Special Elite', monospace;
+    font-size: 0.9rem;
+    color: var(--pink);
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 3rem 1.5rem 2rem; }
+    .hero-right { min-height: 50vh; }
+    .what-grid { grid-template-columns: 1fr; }
+    .about-band { grid-template-columns: 1fr; gap: 2rem; }
+    .cta-form { flex-direction: column; }
+    .hero-info-bar { padding: 1rem 1.5rem; }
+  }
+
+  /* ---- ENTRANCE ANIMATIONS ---- */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="20" cy="32" rx="6" ry="3" fill="#E8007D" opacity="0.4"/>
+      <path d="M20 6 C14 12, 10 18, 14 24 C16 28, 20 30, 20 30 C20 30, 24 28, 26 24 C30 18, 26 12, 20 6Z" fill="#E8007D"/>
+      <path d="M20 14 C18 17, 17 20, 18.5 23 C19 24, 20 25, 20 25 C20 25, 21 24, 21.5 23 C23 20, 22 17, 20 14Z" fill="#FFE500"/>
+      <rect x="17" y="30" width="6" height="3" rx="1" fill="#555"/>
+      <rect x="15" y="33" width="10" height="2" rx="1" fill="#333"/>
+    </svg>
+    <span class="nav-brand">Fuego<span>Creativo</span></span>
+  </div>
+  <a href="#reserve" class="nav-cta">Reserve My Spot</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">☕ June 27, 2025 · Miami, FL</p>
+    <h1 class="hero-title">INSPIRATI<span class="on">ON</span></h1>
+    <p class="hero-sub">(Coffee For Creators)</p>
+    <p class="hero-desc">
+      A monthly gathering for artists, filmmakers, designers, writers, and dreamers ready to reconnect with their <em>creative fire</em>. Specialty coffee. Creative ritual. Real community.
+    </p>
+
+    <div class="hero-date-pill">
+      <span class="dot"></span>
+      FIRST EVENT · JUNE 27 · SPOTS ARE LIMITED
+    </div>
+
+    <!-- FORM -->
+    <div id="reserve">
+      <form class="hero-form" id="heroForm" onsubmit="handleSubmit(event, 'heroForm', 'heroSuccess')">
+        <input type="text" placeholder="Your name" required id="heroName">
+        <input type="email" placeholder="Your email" required id="heroEmail">
+        <button type="submit" class="btn-main">JOIN THE MOVEMENT ↗</button>
+        <p class="form-note">Free to join waitlist. Ticket: $25 (coffee bag included)</p>
+      </form>
+      <div class="success-msg" id="heroSuccess">
+        <p>🔥 You're in! Check your inbox — we'll send event details soon. Ready to create.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-poster">
+      <div class="poster-bg-text">FC</div>
+      <div class="poster-content">
+        <div class="poster-big">
+          <span class="highlight">I'M</span><br>
+          <span class="outline">EXCITED</span><br>
+          TO SEE<br>
+          WHERE<br>
+          <span class="highlight">THIS IS</span><br>
+          ALL<br>
+          GOING
+        </div>
+        <div class="join-label">Join the Movement · Fuegocreativo.com</div>
+      </div>
+    </div>
+
+    <div class="film-strip">
+      <div class="film-hole"></div>
+      <div class="film-hole"></div>
+      <span class="film-text">TIME TO AWAKEN THE ARTIST · BORN TO CREATE · FUEGO CREATIVO COFFEE · COFFEE FOR CREATORS</span>
+      <div class="film-hole"></div>
+      <div class="film-hole"></div>
+    </div>
+
+    <div class="hero-info-bar">
+      <div class="info-item">
+        <span class="info-label">Date</span>
+        <span class="info-value">June 27, 2025</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Location</span>
+        <span class="info-value">Miami, FL</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Ticket</span>
+        <span class="info-value">$25 · Coffee Included</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">Style</span>
+        <span class="info-value">Specialty + Ritual</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-band" aria-hidden="true">
+  <div class="marquee-inner">
+    <span>COFFEE FOR CREATORS</span><span class="dot-sep">✦</span>
+    <span>BORN TO CREATE</span><span class="dot-sep">✦</span>
+    <span>IGNITE YOUR CREATIVE SPARK</span><span class="dot-sep">✦</span>
+    <span>JUNE 27 · MIAMI</span><span class="dot-sep">✦</span>
+    <span>FUEGO CREATIVO COFFEE</span><span class="dot-sep">✦</span>
+    <span>JOIN THE MOVEMENT</span><span class="dot-sep">✦</span>
+    <span>AWAKEN THE ARTIST</span><span class="dot-sep">✦</span>
+    <span>COFFEE FOR CREATORS</span><span class="dot-sep">✦</span>
+    <span>BORN TO CREATE</span><span class="dot-sep">✦</span>
+    <span>IGNITE YOUR CREATIVE SPARK</span><span class="dot-sep">✦</span>
+    <span>JUNE 27 · MIAMI</span><span class="dot-sep">✦</span>
+    <span>FUEGO CREATIVO COFFEE</span><span class="dot-sep">✦</span>
+    <span>JOIN THE MOVEMENT</span><span class="dot-sep">✦</span>
+    <span>AWAKEN THE ARTIST</span><span class="dot-sep">✦</span>
+  </div>
+</div>
+
+<!-- WHAT IS IT -->
+<div class="section fade-up">
+  <p class="section-eyebrow">About the Gathering</p>
+  <h2 class="section-title">A RITUAL.<br>NOT JUST AN EVENT.</h2>
+  <p style="font-family:'Special Elite',monospace; font-size:1rem; color:#555; line-height:1.9; max-width:680px;">
+    Fuego Creativo is a monthly creative fire circle for anyone who makes things — or wants to. Each session combines specialty coffee culture, personal creative development (inspired by <em>Steal Like an Artist</em> and <em>The Artist's Way</em>), and real human connection. No pitch decks. No networking bingo. Just your creative fire, a great cup, and a room full of people who get it.
+  </p>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Creative Session</div>
+      <p class="pillar-desc">Guided exploration of your creative identity. Permission to make. Tools to keep going.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Coffee Tasting</div>
+      <p class="pillar-desc">A specialty coffee experience guided by coffee mentor Jimmy Avendaño. Origin stories. Flavor notes. Real ritual.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Community</div>
+      <p class="pillar-desc">Artists, designers, filmmakers, writers, entrepreneurs. Your creative tribe is already here.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">04</div>
+      <div class="pillar-title">Take It Home</div>
+      <p class="pillar-desc">Every ticket includes a 12oz bag of Colombian specialty coffee. Grind fresh. Brew intentionally. Start creating.</p>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU GET + TICKET -->
+<div class="what-section">
+  <div class="what-inner">
+    <p class="section-eyebrow" style="color: #E8007D;">What's Included</p>
+    <h2 class="section-title" style="color: var(--white);">$25 TICKET.<br><span style="color: var(--pink);">EVERYTHING</span><br>INCLUDED.</h2>
+
+    <div class="what-grid">
+      <div class="what-items">
+        <div class="what-item">
+          <span class="what-tag">COFFEE</span>
+          <p class="what-text"><strong>12oz bag of Fuego Creativo specialty coffee</strong> — Colombian origin, Anserma, Caldas. Yours to take home.</p>
+        </div>
+        <div class="what-item">
+          <span class="what-tag">TASTING</span>
+          <p class="what-text"><strong>Live specialty coffee tasting session</strong> guided by coffee mentor Jimmy Avendaño. Learn what you're drinking.</p>
+        </div>
+        <div class="what-item">
+          <span class="what-tag">SESSION</span>
+          <p class="what-text"><strong>90-minute creative workshop</strong> — The Artist's Way meets Steal Like an Artist. Real exercises. Real breakthroughs.</p>
+        </div>
+        <div class="what-item">
+          <span class="what-tag">COMMUNITY</span>
+          <p class="what-text"><strong>Your creative circle</strong> — meet the people who fuel each other. Monthly. Ongoing. Yours.</p>
+        </div>
+        <div class="what-item">
+          <span class="what-tag">OPTIONAL</span>
+          <p class="what-text"><strong>Portable grinder available</strong> at event price — turn coffee into a daily creative ritual.</p>
+        </div>
+      </div>
+
+      <div class="price-box">
+        <div class="price-amount"><sup>$</sup>25</div>
+        <p class="price-includes">
+          <strong>Includes:</strong><br>
+          ☕ Specialty Coffee Bag (12oz)<br>
+          🎨 Creative Workshop<br>
+          ✦ Coffee Tasting Experience<br>
+          🤝 Creator Community Access
+        </p>
+        <form id="ticketForm" onsubmit="handleSubmit(event, 'ticketForm', 'ticketSuccess')">
+          <input type="email" placeholder="Enter your email" required style="width:100%;padding:0.85rem 1rem;border:1.5px solid #ddd;font-size:0.95rem;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:0;color:#111;">
+          <button type="submit" class="btn-price">RESERVE MY SPOT ↗</button>
+        </form>
+        <div class="success-msg" id="ticketSuccess" style="background:rgba(0,0,0,0.05);border-color:#333;">
+          <p style="color:#333;">🔥 You're on the list! Details coming soon.</p>
+        </div>
+        <p class="spots-left">⚡ Limited seats. First come, first served.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-band fade-up">
+  <div>
+    <p class="section-eyebrow">The Movement</p>
+    <div class="about-quote">
+      BEFORE CREATION,<br>
+      THERE IS<br>
+      <span class="pink">INTENTION.</span><br>
+      BEFORE INTENTION,<br>
+      THERE IS<br>
+      <span class="outline-text">RITUAL.</span>
+    </div>
+  </div>
+  <div>
+    <div class="about-body">
+      <p>Fuego Creativo Coffee is a specialty coffee movement built at the intersection of mentorship, origin knowledge, design culture, and creative storytelling — creating community around a creative fire.</p>
+      <p>Led by specialty coffee mentor <strong>Jimmy Avendaño</strong> and Emmy Award-winning storyteller <strong>Lilian Cordova</strong>, the project connects origin coffee culture with the creator journey.</p>
+      <p>We believe coffee is more than a beverage. It's the pause before creating. The sip before starting. A quiet ignition of the artist inside you.</p>
+    </div>
+    <div class="about-tags">
+      <span class="tag">SPECIALTY COFFEE</span>
+      <span class="tag">COLOMBIAN ORIGIN</span>
+      <span class="tag">CREATOR COMMUNITY</span>
+      <span class="tag">MONTHLY RITUAL</span>
+      <span class="tag">MIAMI</span>
+      <span class="tag">BORN TO CREATE</span>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM CTA -->
+<div class="cta-section">
+  <h2 class="cta-title">JOIN THE<br>MOVEMENT.</h2>
+  <p class="cta-sub">Get early access — event details, ticket link, and the story behind the coffee.</p>
+  <form class="cta-form" id="ctaForm" onsubmit="handleSubmit(event, 'ctaForm', 'ctaSuccess')">
+    <input type="email" placeholder="your@email.com" required>
+    <button type="submit" class="cta-btn">I'M IN ↗</button>
+  </form>
+  <div class="success-msg" id="ctaSuccess" style="max-width:500px;margin:0.75rem auto 0;background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.5);">
+    <p style="color:white;">🔥 Welcome to the movement. See you June 27.</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Fuego Creativo Coffee</span> · Miami, Florida, USA · Roasted with Pure Creative Love</p>
+  <p style="margin-top:0.5rem;">Grind fresh. Brew intentionally. Start creating.</p>
+</footer>
+
+<script>
+  function handleSubmit(e, formId, successId) {
+    e.preventDefault();
+    const form = document.getElementById(formId);
+    const success = document.getElementById(successId);
+    form.style.display = 'none';
+    success.style.display = 'block';
+    // Here you'd POST to your email capture (Mailchimp, ConvertKit, etc.)
+  }
+
+  // Scroll-triggered fade-ups
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
 </html>
