@@ -1,6 +1,0 @@
-{:main fuegocreativo.core
- :output-to "script.js"
- :output-dir "out"
- :optimizations :simple
- :target :browser
- :source-map true}
