@@ -653,6 +653,25 @@
       margin-top: 0.75rem;
     }
 
+    .mc-capture-form input[type="email"] {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1.5px solid #ddd;
+      font-size: 0.95rem;
+      font-family: 'DM Sans', sans-serif;
+      outline: none;
+      color: #111;
+      background: var(--white);
+    }
+
+    .mc-capture-form input[type="email"]::placeholder {
+      color: #999;
+    }
+
+    .mc-capture-form input[type="email"]:focus {
+      border-color: var(--pink);
+    }
+
     /* ---- ABOUT ---- */
     .about-band {
       padding: 5rem 2rem;
@@ -1201,9 +1220,14 @@
             ✦ Coffee Tasting Experience<br>
             🤝 Creator Community Access
           </p>
-          <form id="ticketForm" onsubmit="handleSubmit(event, 'ticketForm', 'ticketSuccess')">
-            <input type="email" placeholder="Enter your email" required
-              style="width:100%;padding:0.85rem 1rem;border:1.5px solid #ddd;font-size:0.95rem;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:0;color:#111;">
+          <form id="ticketForm" class="mc-capture-form"
+            action="https://google.us15.list-manage.com/subscribe/post?u=fffe2862cacbb609a5a94c54c&amp;id=5f646c5e90&amp;f_id=0055b9e0f0"
+            method="post" target="mailchimp-hidden"
+            onsubmit="handleSubmit(event, 'ticketForm', 'ticketSuccess')">
+            <input type="email" name="EMAIL" id="mce-EMAIL-ticket" placeholder="Enter your email" required>
+            <div aria-hidden="true" style="position:absolute;left:-5000px;">
+              <input type="text" name="b_fffe2862cacbb609a5a94c54c_5f646c5e90" tabindex="-1" value="">
+            </div>
             <button type="submit" class="btn-price">RESERVE MY SPOT ↗</button>
           </form>
           <div class="success-msg" id="ticketSuccess" style="background:rgba(0,0,0,0.05);border-color:#333;">
@@ -1253,13 +1277,16 @@
   <div class="cta-section" id="google-form">
     <h2 class="cta-title">JOIN THE<br>MOVEMENT.</h2>
     <p class="cta-sub">Get early access — event details, ticket link, and the story behind the coffee.</p>
-    <!-- <form class="cta-form" id="ctaForm" onsubmit="handleSubmit(event, 'ctaForm', 'ctaSuccess')">
-      <input type="email" placeholder="your@email.com" required>
+    <form class="cta-form mc-capture-form" id="ctaForm"
+      action="https://google.us15.list-manage.com/subscribe/post?u=fffe2862cacbb609a5a94c54c&amp;id=5f646c5e90&amp;f_id=0055b9e0f0"
+      method="post" target="mailchimp-hidden"
+      onsubmit="handleSubmit(event, 'ctaForm', 'ctaSuccess')">
+      <input type="email" name="EMAIL" id="mce-EMAIL-cta" placeholder="your@email.com" required>
+      <div aria-hidden="true" style="position:absolute;left:-5000px;">
+        <input type="text" name="b_fffe2862cacbb609a5a94c54c_5f646c5e90" tabindex="-1" value="">
+      </div>
       <button type="submit" class="cta-btn">I'M IN ↗</button>
-    </form> -->
-    <iframe
-      src="https://docs.google.com/forms/d/e/1FAIpQLSfWcCyUA_HqUpIRSImxxuEcXcrVHjuwWIGovrDzq-9qzePYNQ/viewform?embedded=true"
-      width="640" height="2240" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+    </form>
     <div class="success-msg" id="ctaSuccess"
       style="max-width:500px;margin:0.75rem auto 0;background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.5);">
       <p style="color:white;">🔥 Welcome to the movement. See you July 25 and July 26.</p>
@@ -1267,6 +1294,8 @@
   </div>
 
   <!-- FOOTER -->
+  <iframe name="mailchimp-hidden" title="Mailchimp signup" style="display:none;"></iframe>
+
   <footer>
     <p>© 2026 <span>Fuego Creativo Coffee</span> · Miami, Florida, USA · Roasted with Pure Creative Love</p>
     <p style="margin-top:0.5rem;">Grind fresh. Brew intentionally. Start creating.</p>
@@ -1277,9 +1306,13 @@
       e.preventDefault();
       const form = document.getElementById(formId);
       const success = document.getElementById(successId);
+      const email = form.querySelector('input[name="EMAIL"]');
+      if (!email || !email.value.trim()) return;
+
+      form.submit();
+
       form.style.display = 'none';
       success.style.display = 'block';
-      // Here you'd POST to your email capture (Mailchimp, ConvertKit, etc.)
     }
 
     // Scroll-triggered fade-ups
