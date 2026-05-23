@@ -112,27 +112,22 @@
       background: #c0006a;
     }
 
-    /* ---- HERO BANNER: altura fija = viewport bajo nav; imagen escala por ALTO (100% del componente) ---- */
+    /* ---- HERO BANNER (mobile-first: imagen 100% ancho en flujo; desktop en min-width) ---- */
     .hero-banner {
       margin-top: 72px;
       width: 100%;
-      height: calc(100vh - 72px);
-      height: calc(100dvh - 72px);
-      min-height: 260px;
       position: relative;
       overflow: hidden;
       background-color: black;
+      line-height: 0;
     }
 
     .hero-banner-img {
-      position: absolute;
-      left: 50%;
-      top: 0;
-      transform: translateX(-50%);
-      height: 100%;
-      width: auto;
-      max-width: none;
+      width: 100%;
+      height: auto;
+      max-width: 100%;
       display: block;
+      vertical-align: middle;
       pointer-events: none;
     }
 
@@ -995,6 +990,27 @@
       }
     }
 
+    @media (min-width: 769px) {
+
+      /* ---- HERO BANNER (desktop: altura viewport; imagen escala por alto) ---- */
+      .hero-banner {
+        line-height: normal;
+        height: calc(100vh - 72px);
+        height: calc(100dvh - 72px);
+        min-height: 260px;
+      }
+
+      .hero-banner-img {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        width: auto;
+        height: 100%;
+        max-width: none;
+        transform: translateX(-50%);
+      }
+    }
+
     /* ---- ENTRANCE ANIMATIONS ---- */
     .fade-up {
       opacity: 0;
@@ -1016,12 +1032,13 @@
     <div class="nav-logo">
       <img src="https://i.imgur.com/DsZ4qYK.png" alt="" loading="eager" decoding="async">
     </div>
-    <a href="#ticket" class="nav-cta">Reserve My Spot</a>
+    <a href="https://www.eventbrite.com/e/awaken-the-artist-fuego-creativo-coffee-for-creators-tickets-1990149901930?aff=oddtdtcreator"
+      class="nav-cta">Reserve My Spot</a>
   </nav>
 
   <!-- Imagen subida por lili en google photos -->
   <!-- https://photos.google.com/share/AF1QipPESKp0J7KnhTkKwZ7yNRNxaxfKoaj4ihiTkLRmJrGRpCVS4npY5O2YjLJQ8ughfw/photo/AF1QipOMtvYX56gHQocEB1tMNFiVawGGtebPVFEAqGS8?key=eUp3dnlabGpqal9iOURBdUZSWHBSa1diTzRnM2R3 -->
-  <!-- HERO BANNER (altura viewport; imagen a altura 100%) -->
+  <!-- HERO BANNER (móvil: 100% ancho; desktop: altura viewport) -->
   <section class="hero-banner" aria-label="Fuego Creativo">
     <img class="hero-banner-img" src="https://i.imgur.com/owM4uBe.png"
       alt="Fuego Creativo — Join the Movement. Coffee for Creators." loading="eager" decoding="async">
@@ -1251,8 +1268,7 @@
     <p class="cta-sub">Get early access — event details, ticket link, and the story behind the coffee.</p>
     <form class="cta-form" id="ctaForm"
       action="https://google.us15.list-manage.com/subscribe/post?u=fffe2862cacbb609a5a94c54c&amp;id=5f646c5e90&amp;f_id=0055b9e0f0"
-      method="post" target="mailchimp-hidden"
-      onsubmit="handleSubmit(event, 'ctaForm', 'ctaSuccess')">
+      method="post" target="mailchimp-hidden" onsubmit="handleSubmit(event, 'ctaForm', 'ctaSuccess')">
       <input type="email" name="EMAIL" id="mce-EMAIL-cta" placeholder="your@email.com" required>
       <div aria-hidden="true" style="position:absolute;left:-5000px;">
         <input type="text" name="b_fffe2862cacbb609a5a94c54c_5f646c5e90" tabindex="-1" value="">
